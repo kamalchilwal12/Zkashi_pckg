@@ -12,7 +12,7 @@ define view entity zcds_I_connection_01 as select from /dmo/connection
     @UI.facet: [{ purpose: #STANDARD,
         type: #IDENTIFICATION_REFERENCE,
         position: 10,
-        label: 'Customer Detaisl'  }]
+        label: 'Customer Details'  }]
         
     @UI.selectionField: [{ position: 10 }]
     @UI.lineItem: [{ position: 10 }]
