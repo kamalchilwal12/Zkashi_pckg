@@ -1,4 +1,5 @@
 @EndUserText.label: 'service defination'
 define service Zsd_conn_01 {
   expose zcds_I_connection_01;
+  expose zcds_i_flight_001;
 }
