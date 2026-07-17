@@ -6,6 +6,7 @@
     typeName: 'Connection',
     typeNamePlural: 'Connecetion'
 }
+//the below application is for read only purpose
 @Search.searchable: true // added searchable field by which we can search the data in our list report
 
 define view entity zcds_I_connection_01
