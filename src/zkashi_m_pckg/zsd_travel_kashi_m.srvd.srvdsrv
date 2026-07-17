@@ -1,0 +1,6 @@
+@EndUserText.label: 'service defination'
+define service ZsD_travel_kashi_M {
+  expose zc_travel_kashi_m;
+  expose zc_booking_kashi_m;
+  expose zc_booksuppl_kashi_m;
+}

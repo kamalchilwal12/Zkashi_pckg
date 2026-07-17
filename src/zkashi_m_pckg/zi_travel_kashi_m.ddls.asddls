@@ -1,6 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'travel root entiry'
 @Metadata.ignorePropagatedAnnotations: true
+
 define root view entity zi_travel_kashi_m
   as select from ztravel_kashi_m
   composition [0..*] of zi_booking_kashi_m       as _booking

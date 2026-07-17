@@ -1,13 +1,18 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'consumption travel or projection view'
-@Metadata.ignorePropagatedAnnotations: true
+//@Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
 define root view entity zc_travel_kashi_m 
 provider contract transactional_query
 as projection on zi_travel_kashi_m
 {
     key TravelId,
+    @ObjectModel.text.element: [ 'AgencyName' ]
     AgencyId,
+    _agency.Name as AgencyName,
+    @ObjectModel.text.element: [ 'CustomerName' ]
     CustomerId,
+    _customer.LastName as CustomerName,
     BeginDate,
     EndDate,
     @Semantics.amount.currencyCode: 'CurrencyCode'
@@ -16,7 +21,9 @@ as projection on zi_travel_kashi_m
     TotalPrice,
     CurrencyCode,
     Description,
+    @ObjectModel.text.element: [ 'overallstatustext' ]
     OverallStatus,
+    _status._Text.Text as overallstatustext : localized ,
     CreatedBy,
     CreatedAt,
     LastChangedBy,
