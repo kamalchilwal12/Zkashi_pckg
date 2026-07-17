@@ -2,6 +2,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'interface cds view for flight details'
 @Metadata.ignorePropagatedAnnotations: true
+@Search.searchable: true
 define view entity zcds_i_flight_001
   as select from /dmo/flight
   association [1..1] to zcds_i_carrier_001 as _airline on $projection.CarrierId = _airline.CarrierId
@@ -19,6 +20,7 @@ define view entity zcds_i_flight_001
       @UI.lineItem: [{ position: 50 }]
       currency_code  as CurrencyCode,
       @UI.lineItem: [{ position: 60 }]
+      @Search.defaultSearchElement: true 
       plane_type_id  as PlaneTypeId,
       @UI.lineItem: [{ position: 70 }]
       seats_max      as SeatsMax,
