@@ -15,10 +15,17 @@ annotate view zc_travel_kashi_m with
   @UI.facet: [{
       id: 'Travel',
       purpose: #STANDARD,
-      parentId: '',
       position: 10,
       label: 'Travel',
       type: #IDENTIFICATION_REFERENCE
+  },
+  {
+      id: 'Booking',
+      purpose: #STANDARD,
+      position: 20,
+      label: 'Booking',
+      type: #LINEITEM_REFERENCE ,// same object page we want to display the data in the below line that why we are using lineitem_ref
+      targetElement: '_booking'
   }]
 
   @UI.lineItem: [{ position: 10 }]
@@ -61,7 +68,8 @@ annotate view zc_travel_kashi_m with
   Description;
   @UI: { lineItem: [{ position: 70 }],
       selectionField: [{ position: 70  }] ,
-      identification: [{ position : 70 }]}
+      identification: [{ position : 70 }],
+      textArrangement: #TEXT_ONLY } // this will remove the description value like : open( o ) to open
   @Search.defaultSearchElement: true
   @Consumption.valueHelpDefinition: [{ entity : { name: '/dmo/I_overall_status_VH',
                                                   element: 'OverallStatus'} }]
