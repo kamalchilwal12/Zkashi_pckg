@@ -6,12 +6,13 @@ implementation in class zbp_travel_kashi_m unique
 persistent table ztravel_kashi_m
 lock master
 authorization master ( instance )
-etag master LastChangedAt
+etag master LastChangedAt // etag for optimistic concurrency control
+early numbering  // early numbering
 {
+  field ( readonly ) TravelId;
   create ( authorization : global );
   update;
   delete;
-  field ( readonly ) TravelId;
   association _booking { create; }
   mapping for ztravel_kashi_m
     {

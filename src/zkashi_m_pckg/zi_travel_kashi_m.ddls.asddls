@@ -26,7 +26,7 @@ define root view entity zi_travel_kashi_m
       created_by      as CreatedBy,
       created_at      as CreatedAt,
       last_changed_by as LastChangedBy,
-      @Semantics.systemDateTime.localInstanceLastChangedAt: true
+      @Semantics.systemDateTime.localInstanceLastChangedAt: true // semantics annotation for etag for the lastchangedat field
       last_changed_at as LastChangedAt,
       _booking,
       _agency,

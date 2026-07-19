@@ -62,7 +62,6 @@ annotate view zc_travel_kashi_m with
   TotalPrice;
   @Consumption.valueHelpDefinition: [{ entity : { name: 'I_currency',
                                                   element: 'Currency'} }]
-  @UI.hidden: true
   CurrencyCode;
   @UI.identification: [{ position : 65 }]
   Description;
