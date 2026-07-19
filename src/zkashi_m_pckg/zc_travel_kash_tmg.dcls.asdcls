@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZC_TRAVEL_KASH_TMG'
+@MappingRole: true
+define role ZC_TRAVEL_KASH_TMG {
+  grant select on ZC_TRAVEL_KASH_TMG
+  where INHERITING CONDITIONS FROM ENTITY ZR_TRAVEL_KASH_TMG REPLACING { ROOT WITH _BaseEntity };
+}
