@@ -31,47 +31,63 @@ annotate view zc_travel_kashi_m with
   @UI.lineItem: [{ position: 10 }]
   @UI.identification: [{ position : 10 }]
   @Search.defaultSearchElement: true
+  // Field grouping i'm doing
+  //@UI.fieldGroup: [{ qualifier: 'GeneralInfo'  , position: 10 ,importance: #HIGH }]
   TravelId;
   @UI: { lineItem: [{ position: 20 }],
          selectionField: [{ position: 20  }],
-         identification: [{ position : 20 }] }
+        identification: [{ position : 20 }] 
+ }
   @Search.defaultSearchElement: true
   @Consumption.valueHelpDefinition: [{ entity : { name: '/DMO/I_Agency',
                                                   element: 'AgencyID' } }]
+  //@UI.fieldGroup: [{ qualifier: 'GeneralInfo'  , position: 10 , importance: #HIGH }] // adding agency id travel id in the same field group                                                
   AgencyId;
   //AgencyName;
   @UI: { lineItem: [{ position: 30 }],
          selectionField: [{ position: 30  }],
-         identification: [{ position : 30 }] }
+         identification: [{ position : 30 }] 
+         }
   @Search.defaultSearchElement: true
   @Consumption.valueHelpDefinition: [{ entity : { name: '/dmo/I_customer',
                                                   element: 'CustomerID'} }]
+//  @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20, importance: #HIGH }]       // grouping customer id                     
   CustomerId;
   @UI.hidden: true
   CustomerName;
   @UI.lineItem: [{ position: 40 }]
   @UI.identification: [{ position : 40 }]
+ // @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20, importance: #HIGH }]// grouping customer id and begin date in same group
   BeginDate;
   @UI.lineItem: [{ position: 50 }]
-  @UI.identification: [{ position : 50 }]
+ @UI.identification: [{ position : 50 }]
+  //@UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
+  //@UI.fieldGroup: [{ qualifier: 'GeneralInfo'  , position: 10 , importance: #HIGH }]
   EndDate;
   @UI.identification: [{ position : 55 }]
+//  @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
   BookingFee;
   @UI.lineItem: [{ position: 60 }]
   @UI.identification: [{ position : 60 }]
+ // @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
+ //@UI.fieldGroup: [{ qualifier: 'GeneralInfo'  , position: 10 , importance: #HIGH }]
   TotalPrice;
   @Consumption.valueHelpDefinition: [{ entity : { name: 'I_currency',
                                                   element: 'Currency'} }]
+ // @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
   CurrencyCode;
-  @UI.identification: [{ position : 65 }]
+ @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
+ // @UI.identification: [{ position : 65 }]
   Description;
+  //@UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 }]
+  //@UI.fieldGroup: [{ qualifier: 'GeneralInfo'  , position: 10 , importance: #HIGH }]
   @UI: { lineItem: [{ position: 70 }],
       selectionField: [{ position: 70  }] ,
-      identification: [{ position : 70 }],
+    identification: [{ position : 70 }],
       textArrangement: #TEXT_ONLY } // this will remove the description value like : open( o ) to open
   @Search.defaultSearchElement: true
   @Consumption.valueHelpDefinition: [{ entity : { name: '/dmo/I_overall_status_VH',
-                                                  element: 'OverallStatus'} }]
+                                                  element: 'OverallStatus'} }]                                                
   OverallStatus;
   @UI.hidden: true
   overallstatustext;

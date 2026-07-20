@@ -1,0 +1,58 @@
+managed implementation in class ZBP_R_BOOKING_KA_TMG unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_BOOKING_KA_TMG000 alias ZrBookingKaTmg000
+persistent table ZBOOKING_KA_TMG
+extensible
+draft table ZBOKING_KA_TMG_D
+etag master Locallastchangedat
+lock master total etag Lastchangedat
+authorization master( global )
+{
+  field ( mandatory : create )
+   TravelID,
+   BookingID;
+
+  field ( readonly )
+   Localcreatedby,
+   Localcreatedat,
+   Locallastchangedby,
+   Locallastchangedat,
+   Lastchangedat;
+
+  field ( readonly : update )
+   TravelID,
+   BookingID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZBOOKING_KA_TMG corresponding extensible
+  {
+    TravelID = TRAVEL_ID;
+    BookingID = BOOKING_ID;
+    BookingDate = BOOKING_DATE;
+    CustomerID = CUSTOMER_ID;
+    CarrierID = CARRIER_ID;
+    ConnectionID = CONNECTION_ID;
+    FlightDate = FLIGHT_DATE;
+    FlightPrice = FLIGHT_PRICE;
+    CurrencyCode = CURRENCY_CODE;
+    BookingStatus = BOOKING_STATUS;
+    Localcreatedby = LOCALCREATEDBY;
+    Localcreatedat = LOCALCREATEDAT;
+    Locallastchangedby = LOCALLASTCHANGEDBY;
+    Locallastchangedat = LOCALLASTCHANGEDAT;
+    Lastchangedat = LASTCHANGEDAT;
+  }
+
+}

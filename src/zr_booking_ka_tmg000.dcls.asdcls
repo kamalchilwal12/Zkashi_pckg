@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZR_BOOKING_KA_TMG000'
+@MappingRole: true
+define role ZR_BOOKING_KA_TMG000 {
+  grant select on ZR_BOOKING_KA_TMG000
+  where TRUE;
+}
