@@ -1,0 +1,26 @@
+managed; //implementation in class zbp_i_employee_hr_kashi unique;
+strict ( 2 );
+
+define behavior for zi_employee_hr_kashi alias ADF_employee
+implementation in class zbp_i_employee_hr_adf_kashi unique
+persistent table zemployee_hr_kas
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) Employee;
+  mapping for zemployee_hr_kas
+    {
+      Employee       = employee;
+      FirstName      = first_name;
+      LastName       = last_name;
+      salary         = Salary;
+      SalaryCurrency = salary_currency;
+      Manager        = manager;
+    }
+
+
+}

@@ -1,0 +1,9 @@
+projection;
+strict ( 2 );
+
+define behavior for zc_employee_hr_kashi alias ADF_employee
+{
+  use create;
+  use update;
+  use delete;
+}

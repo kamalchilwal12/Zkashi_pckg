@@ -1,0 +1,5 @@
+@EndUserText.label: 'service defination'
+@ObjectModel.leadingEntity.name: 'ZC_EMPLOYEE_HR_KASHI'
+define service ZsD_employee_hr_kashi {
+  expose zc_employee_hr_kashi;
+}
