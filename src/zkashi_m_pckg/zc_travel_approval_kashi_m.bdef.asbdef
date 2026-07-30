@@ -1,0 +1,23 @@
+projection;
+strict ( 2 );
+
+define behavior for zc_travel_approval_kashi_m //alias <alias_name>
+{
+  ////use create;
+  use update;
+//  use delete;
+
+  use action accepttravel;
+  use action rejecttravel;
+ // use action copytravel;
+
+ // use association _booking { create; }
+}
+
+//define behavior for zc_booking_approval_kashi_m //alias <alias_name>
+//{
+  //use update;
+  //use delete;
+
+  //use association _travel;
+//}

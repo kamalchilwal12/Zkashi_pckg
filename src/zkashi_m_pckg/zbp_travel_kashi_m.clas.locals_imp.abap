@@ -6,6 +6,17 @@ CLASS lhc_zi_travel_kashi_m DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
       IMPORTING REQUEST requested_authorizations FOR zi_travel_kashi_m RESULT result.
+    METHODS accepttravel FOR MODIFY
+      IMPORTING keys FOR ACTION zi_travel_kashi_m~accepttravel RESULT result.
+
+    METHODS copytravel FOR MODIFY
+      IMPORTING keys FOR ACTION zi_travel_kashi_m~copytravel.
+
+    METHODS recalctoprice FOR MODIFY
+      IMPORTING keys FOR ACTION zi_travel_kashi_m~recalctoprice.
+
+    METHODS rejecttravel FOR MODIFY
+      IMPORTING keys FOR ACTION zi_travel_kashi_m~rejecttravel RESULT result.
 
     METHODS earlynumbering_create FOR NUMBERING
       IMPORTING entities FOR CREATE zi_travel_kashi_m.
@@ -68,6 +79,99 @@ CLASS lhc_zi_travel_kashi_m IMPLEMENTATION.
 
     ENDLOOP.
 
+  ENDMETHOD.
+
+  METHOD accepttravel.
+  ENDMETHOD.
+
+  METHOD copytravel.
+
+    DATA: it_travel   TYPE TABLE FOR CREATE zi_travel_kashi_m,
+          it_booking  TYPE TABLE FOR CREATE zi_travel_kashi_m\_booking,
+          it_booksupp TYPE TABLE FOR CREATE zi_booking_kashi_m\_booksuppl.
+
+    READ TABLE keys ASSIGNING FIELD-SYMBOL(<ls_withoutcid>) WITH KEY %cid = ' '.
+    ASSERT <ls_withoutcid> IS NOT ASSIGNED.
+    READ ENTITIES OF  zi_travel_kashi_m IN LOCAL MODE
+    ENTITY  zi_travel_kashi_m
+    ALL FIELDS WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_travel_r)
+    FAILED DATA(lt_failed).
+
+    READ ENTITIES OF  zi_travel_kashi_m IN LOCAL MODE
+   ENTITY  zi_travel_kashi_m BY \_booking
+    ALL FIELDS WITH CORRESPONDING #( lt_travel_r )
+    RESULT DATA(lt_booking_r).
+    " failed data(lt_failed).
+
+    READ ENTITIES OF  zi_travel_kashi_m IN LOCAL MODE
+       ENTITY  zi_booking_kashi_m BY \_booksuppl
+       ALL FIELDS WITH CORRESPONDING #( lt_booking_r )
+       RESULT DATA(lt_booksupp_r).
+
+    LOOP AT lt_travel_r ASSIGNING FIELD-SYMBOL(<ls_travel_r>).
+
+      APPEND VALUE #(  %cid = keys[ KEY entity Travelid = <ls_travel_r>-travelid ]-%cid
+                       %data = CORRESPONDING #( <ls_travel_r> EXCEPT travelid ) )
+                       TO it_travel ASSIGNING FIELD-SYMBOL(<ls_travel>).
+      <ls_travel>-BeginDate = cl_abap_context_info=>get_system_date( ).
+      <ls_travel>-EndDate =  cl_abap_context_info=>get_system_date( ) + 30.
+      <ls_travel>-OverallStatus = 'O'.
+
+      APPEND VALUE #( %cid_ref = <ls_travel>-%cid )
+      TO it_booking ASSIGNING FIELD-SYMBOL(<it_bookings>).
+
+      LOOP AT lt_booking_r ASSIGNING FIELD-SYMBOL(<ls_booking_r>)
+                                  USING KEY entity
+                                  WHERE TravelId = <ls_travel_r>-TravelId.
+
+        APPEND VALUE #( %cid = <ls_travel>-%cid && <ls_booking_r>-BookingId
+                        %data = CORRESPONDING #( <ls_booking_r> EXCEPT travelid ) )
+                        TO <it_bookings>-%target ASSIGNING FIELD-SYMBOL(<ls_booking_n>).
+
+        <ls_booking_n>-BookingStatus = 'N'.
+
+        APPEND VALUE #( %cid_ref = <ls_booking_n>-%cid )
+      TO it_booksupp ASSIGNING FIELD-SYMBOL(<ls_booksupp>).
+
+        LOOP AT lt_booksupp_r ASSIGNING FIELD-SYMBOL(<ls_booksupp_r>)
+                                                USING KEY entity
+                                                WHERE travelid = <ls_travel_r>-TravelId
+                                                AND bookingid = <ls_booking_r>-BookingId.
+
+          APPEND VALUE #( %cid = <ls_travel>-%cid && <ls_booking_r>-BookingId && <ls_booksupp_r>-SupplementId
+                          %data = CORRESPONDING #( <ls_booksupp_r>  EXCEPT travelid bookingid  )  )
+                          TO <ls_booksupp>-%target.
+
+        ENDLOOP.
+      ENDLOOP.
+    ENDLOOP.
+
+    MODIFY ENTITIES OF zi_travel_kashi_m IN LOCAL MODE
+    ENTITY zi_travel_kashi_m
+    CREATE FIELDS ( AgencyId CustomerId BeginDate EndDate BookingFee TotalPrice CurrencyCode OverallStatus Description )
+    WITH it_travel
+
+    ENTITY zi_travel_kashi_m
+    CREATE BY \_booking
+    FIELDS ( BookingId BookingDate  CustomerId CarrierId ConnectionId FlightDate FlightPrice CurrencyCode BookingStatus )
+    WITH it_booking
+
+    ENTITY zi_booking_kashi_m
+    CREATE BY \_booksuppl
+    FIELDS ( BookingSupplementId SupplementId Price CurrencyCode )
+    WITH it_booksupp
+
+    MAPPED DATA(it_mapped).
+
+    mapped-zi_travel_kashi_m = it_mapped-zi_travel_kashi_m.
+
+  ENDMETHOD.
+
+  METHOD recalctoprice.
+  ENDMETHOD.
+
+  METHOD rejecttravel.
   ENDMETHOD.
 
 ENDCLASS.

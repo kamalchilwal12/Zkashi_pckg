@@ -9,10 +9,10 @@
         value: 'TravelId'
     }
 }
-
-annotate view zc_travel_kashi_m with
+annotate entity zc_travel_approval_kashi_m
+    with 
 {
-  @UI.facet: [{
+    @UI.facet: [{
       id: 'Travel',
       purpose: #STANDARD,
       position: 10,
@@ -28,10 +28,9 @@ annotate view zc_travel_kashi_m with
       targetElement: '_booking'
   }]
 
-  @UI.lineItem: [{ position: 10 },
-                  { type: #FOR_ACTION , dataAction: 'copytravel', label : 'Copy Travel' }]
-                //  { type: #FOR_ACTION , dataAction: 'accepttravel', label : 'Approve Travel' },
-                  //{ type: #FOR_ACTION , dataAction: 'rejecttravel', label : 'Reject Travel' }]
+  @UI.lineItem: [{ position: 10 , importance: #HIGH },//importance is used in search to give this field high importnace then other 
+                 { type: #FOR_ACTION , dataAction: 'accepttravel', label : 'Approve Travel' },
+                  { type: #FOR_ACTION , dataAction: 'rejecttravel', label : 'Reject Travel' }]
   @UI.identification: [{ position : 10 }]
   @Search.defaultSearchElement: true
   // Field grouping i'm doing
@@ -56,8 +55,8 @@ annotate view zc_travel_kashi_m with
                                                   element: 'CustomerID'} }]
 //  @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20, importance: #HIGH }]       // grouping customer id                     
   CustomerId;
-  @UI.hidden: true
-  CustomerName;
+  //@UI.hidden: true
+  //customername;
   @UI.lineItem: [{ position: 40 }]
   @UI.identification: [{ position : 40 }]
  // @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20, importance: #HIGH }]// grouping customer id and begin date in same group
@@ -84,16 +83,20 @@ annotate view zc_travel_kashi_m with
   Description;
   //@UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 }]
   //@UI.fieldGroup: [{ qualifier: 'GeneralInfo'  , position: 10 , importance: #HIGH }]
-  @UI: { lineItem: [{ position: 70 }],
+  @UI: { lineItem: [{ position: 70 },
+                    { type: #FOR_ACTION , dataAction: 'accepttravel', label : 'Approve Travel' },
+                  { type: #FOR_ACTION , dataAction: 'rejecttravel', label : 'Reject Travel' } ],
       selectionField: [{ position: 70  }] ,
-    identification: [{ position : 70 }],
+    identification: [{ position : 70 },
+                      { type: #FOR_ACTION , dataAction: 'accepttravel', label : 'Approve Travel' },
+                  { type: #FOR_ACTION , dataAction: 'rejecttravel', label : 'Reject Travel' } ],
       textArrangement: #TEXT_ONLY } // this will remove the description value like : open( o ) to open
   @Search.defaultSearchElement: true
   @Consumption.valueHelpDefinition: [{ entity : { name: '/dmo/I_overall_status_VH',
                                                   element: 'OverallStatus'} }]                                                
   OverallStatus;
-  @UI.hidden: true
-  overallstatustext;
+  //@UI.hidden: true
+  //overallstatustext;
   @UI.hidden: true
   CreatedBy;
   @UI.hidden: true
@@ -102,6 +105,5 @@ annotate view zc_travel_kashi_m with
   LastChangedBy;
   @UI.hidden: true
   LastChangedAt;
-
-
+    
 }

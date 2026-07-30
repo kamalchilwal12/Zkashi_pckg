@@ -7,6 +7,9 @@ use etag
   use create;
   use update;
   use delete;
+  use  action copytravel;
+ // use  action accepttravel;
+ // use  action rejecttravel;
 
   use association _booking { create; }
 }

@@ -10,7 +10,7 @@
     }
 }
 
-annotate view zc_booking_kashi_m with
+annotate view zc_booking_approval_kashi_m with
 {
   //TravelId;
   @UI.facet: [{
@@ -90,12 +90,12 @@ annotate view zc_booking_kashi_m with
                                                   element: 'BookingStatus'} }]
   BookingStatus;
   // @UI.lineItem: [{ position: 100 }]
- // @UI.hidden: true
-  //LastChangedAt;
+  // LastChangedAt;
   /* Associations */
-   //_booking_status;
-  //_booksuppl;
+  //  _booking_status;
+  // _booksuppl;
+  // _carrier;
   // _connection;
-  // _customer;
+  //_customer;
   // _travel;
 }
