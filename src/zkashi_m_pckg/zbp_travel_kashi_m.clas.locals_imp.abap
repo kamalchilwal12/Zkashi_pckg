@@ -82,6 +82,22 @@ CLASS lhc_zi_travel_kashi_m IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD accepttravel.
+
+    MODIFY ENTITIES OF zi_travel_kashi_m IN LOCAL MODE
+    ENTITY zi_travel_kashi_m
+    UPDATE FIELDS ( OverallStatus )
+    WITH VALUE #( FOR ls_keys IN keys (  %tky = ls_keys-%tky
+                                         OverallStatus = 'A'   ) )
+    REPORTED DATA(lt_travel).
+
+    READ ENTITIES OF zi_travel_kashi_m IN LOCAL MODE
+    ENTITY zi_travel_kashi_m
+    ALL FIELDS WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_result).
+
+    result = VALUE #( FOR ls_result IN lt_result ( %tky = ls_result-%tky
+                                               %param = ls_result ) ).
+
   ENDMETHOD.
 
   METHOD copytravel.
@@ -172,6 +188,21 @@ CLASS lhc_zi_travel_kashi_m IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD rejecttravel.
+
+    MODIFY ENTITIES OF zi_travel_kashi_m IN LOCAL MODE
+      ENTITY zi_travel_kashi_m
+      UPDATE FIELDS ( OverallStatus )
+      WITH VALUE #( FOR ls_keys IN keys (  %tky = ls_keys-%tky
+                                           OverallStatus = 'X'   ) )
+      REPORTED DATA(lt_travel).
+
+    READ ENTITIES OF zi_travel_kashi_m IN LOCAL MODE
+    ENTITY zi_travel_kashi_m
+    ALL FIELDS WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_result).
+
+    result = VALUE #( FOR ls_result IN lt_result ( %tky = ls_result-%tky
+                                               %param = ls_result ) ).
   ENDMETHOD.
 
 ENDCLASS.

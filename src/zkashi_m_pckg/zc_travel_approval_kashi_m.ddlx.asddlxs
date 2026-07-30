@@ -78,9 +78,12 @@ annotate entity zc_travel_approval_kashi_m
                                                   element: 'Currency'} }]
  // @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
   CurrencyCode;
- @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
+  @UI: { lineItem: [{ position: 65, label : 'Description' }],
+         identification: [{ position : 70 , label :'Description' }]
+         }
+  @UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 , importance: #HIGH}]
  // @UI.identification: [{ position : 65 }]
-  Description;
+   Description;
   //@UI.fieldGroup: [{ qualifier: 'CustomerInfo'  , position: 20 }]
   //@UI.fieldGroup: [{ qualifier: 'GeneralInfo'  , position: 10 , importance: #HIGH }]
   @UI: { lineItem: [{ position: 70 },
