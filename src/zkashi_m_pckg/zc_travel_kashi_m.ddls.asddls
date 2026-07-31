@@ -24,9 +24,13 @@ as projection on zi_travel_kashi_m
     @ObjectModel.text.element: [ 'overallstatustext' ]
     OverallStatus,
     _status._Text.Text as overallstatustext : localized ,
+ //   @Semantics.user.createdBy: true
     CreatedBy,
+ //   @Semantics.systemDateTime.createdAt: true
     CreatedAt,
+  //  @Semantics.user.localInstanceLastChangedBy: true
     LastChangedBy,
+ //   @Semantics.systemDateTime.localInstanceLastChangedAt: true
     LastChangedAt,
     /* Associations */
     _agency,

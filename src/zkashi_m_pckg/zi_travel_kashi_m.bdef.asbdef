@@ -9,10 +9,14 @@ authorization master ( instance )
 etag master LastChangedAt // etag for optimistic concurrency control
 early numbering  // early numbering
 {
-  field ( readonly ) TravelId;
+  field ( readonly ) TravelId, CreatedBy, CreatedAt, LastChangedBy, LastChangedAt;
+  field ( mandatory ) AgencyId, CustomerId, BeginDate, EndDate, BookingFee, OverallStatus, CurrencyCode;
+  // feature control
+  action ( features : instance ) accepttravel result [1] $self;
+  action ( features : instance ) rejecttravel result [1] $self;
   //instacne action
-  action accepttravel result[1] $self;
-  action rejecttravel result[1] $self;
+  //action accepttravel result[1] $self;
+  // action rejecttravel result[1] $self;
   //factory action
   factory action copytravel [1];
   //internal action
@@ -50,9 +54,13 @@ etag master LastChangedAt
 {
   update;
   delete;
-  field ( readonly ) TravelId, BookingId;
+  field ( readonly ) TravelId, BookingId, LastChangedAt ;
+  field ( mandatory ) carrierId ,ConnectionId, FlightDate ,  BookingStatus;
+  field ( mandatory : create , readonly : update ) BookingDate , CustomerId  ;
   association _travel;
-  association _booksuppl { create; }
+  // dynamic feature control
+  association _booksuppl { create( features : instance ); }
+  //association _booksuppl { create( ); }
   mapping for zbooking_kashi_m
     {
       TravelId      = travel_id;
@@ -78,7 +86,8 @@ etag master LastChangedAt
 {
   update;
   delete;
-  field ( readonly ) TravelId, BookingId, BookingSupplementId;
+  field ( readonly ) TravelId, BookingId, BookingSupplementId, LastChangedAt;
+  field ( mandatory ) Price, SupplementId ;
   association _travel;
   association _booking;
   mapping for zbooksupp_kash_m
