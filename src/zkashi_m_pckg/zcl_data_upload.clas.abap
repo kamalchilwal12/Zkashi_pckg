@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_data_upload IMPLEMENTATION.
+CLASS ZCL_DATA_UPLOAD IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
     DELETE FROM ztravel_kashi_m.
     DELETE FROM zbooking_kashi_m.

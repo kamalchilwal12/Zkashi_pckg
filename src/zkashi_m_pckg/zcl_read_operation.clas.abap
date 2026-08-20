@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_read_operation IMPLEMENTATION.
+CLASS ZCL_READ_OPERATION IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
  " sort from read.
  "READ entity zi_travel_kashi_m from value #( ( %key-TravelId = '4220' ) )
@@ -56,5 +58,4 @@ CLASS zcl_read_operation IMPLEMENTATION.
     endif.
 
   ENDMETHOD.
-
 ENDCLASS.

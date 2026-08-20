@@ -19,12 +19,14 @@ early numbering  // early numbering
   // action rejecttravel result[1] $self;
   //factory action
   factory action copytravel [1];
+  //validation
+  validation validatecustomer on save { create; field CustomerId; }
   //internal action
   internal action recalctoprice;
   create ( authorization : global );
   update;
   delete;
-  association _booking { create; }
+  association _booking { create( features : instance ); }
   mapping for ztravel_kashi_m
     {
       TravelId      = travel_id;

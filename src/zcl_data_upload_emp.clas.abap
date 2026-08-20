@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_data_upload_emp IMPLEMENTATION.
+CLASS ZCL_DATA_UPLOAD_EMP IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
     DELETE FROM zemployee_hr_kas.
     COMMIT WORK.

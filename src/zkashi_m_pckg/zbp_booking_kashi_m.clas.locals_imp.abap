@@ -10,6 +10,21 @@ ENDCLASS.
 CLASS lhc_zi_booking_kashi_m IMPLEMENTATION.
 
   METHOD get_instance_features.
+
+  READ ENTITIES OF zi_travel_kashi_m  IN LOCAL MODE
+    ENTITY zi_travel_kashi_m by \_booking
+    FIELDS (  TravelId BookingStatus )
+    with CORRESPONDING #( keys )
+    result data(lt_booking).
+
+    result = VALUE #( for ls_booking in lt_booking
+                        ( %tky = ls_booking-%tky
+                          %features-%assoc-_booksuppl = cond #( when ls_booking-BookingStatus = 'X'
+                                                                    then if_abap_behv=>fc-o-disabled
+                                                                    else if_abap_behv=>fc-o-enabled )
+                          )  ).
+
+
   ENDMETHOD.
 
 ENDCLASS.

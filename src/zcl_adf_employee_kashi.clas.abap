@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_adf_employee_kashi IMPLEMENTATION.
+CLASS ZCL_ADF_EMPLOYEE_KASHI IMPLEMENTATION.
+
+
   METHOD if_rap_query_provider~select.
     DATA: lv_employee  TYPE zi_employee_hr_kashi-Employee,
           lt_form_data TYPE STANDARD TABLE OF zce_employee_hr_kashi.
@@ -83,5 +85,4 @@ CLASS zcl_adf_employee_kashi IMPLEMENTATION.
 
 
   ENDMETHOD.
-
 ENDCLASS.
