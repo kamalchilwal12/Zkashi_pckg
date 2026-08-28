@@ -1,0 +1,33 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "applicatin job template",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "catalogName": "ZAPJC_NEW_APJ"
+  },
+  "parameters": {
+    "singleValueParameters": [
+      {
+        "name": "P_REORQT",
+        "value": "10"
+      },
+      {
+        "name": "P_SIMUL",
+        "value": ""
+      },
+      {
+        "name": "P_STORID",
+        "value": ""
+      }
+    ],
+    "valueRangesParameters": [
+      {
+        "name": "S_BOOKID",
+        "valueRanges": []
+      }
+    ]
+  }
+}
