@@ -1,0 +1,23 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_Travel_tech_U_kashi //alias <alias_name>
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Booking { create; }
+}
+
+
+define behavior for Zc_booking_tech_u_kashi //alias Booking
+use etag
+{
+  //
+    use update;
+    use delete;
+  //
+  use association _Travel;
+}

@@ -1,0 +1,15 @@
+managed implementation in class zbp_i_employee_hr_data unique;
+strict ( 2 );
+
+define behavior for ZI_Employee_hr_data alias Employee//alias <alias_name>
+persistent table zcds_emp_detail
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) EmployeeId;
+    action approveHike parameter ZSalaryHikeRequest result [1] $self;
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'employee data'
+define service Zemp_hr_data {
+  expose ZI_Employee_hr_data;
+}
