@@ -1,0 +1,15 @@
+managed;// implementation in class zbp_i_kashi_rap_book unique;
+//strict ( 2 );
+
+define behavior for zi_kashi_rap_book //alias <alias_name>
+//implementation in class zbp_i_kashi_rap_book unique
+persistent table zkashi_rap_book
+lock master
+//authorization master ( instance )
+//etag master <field_name>
+{
+  create ;//( authorization : global );
+  update;
+  delete;
+ //field ( readonly ) TravelId, BookingId;
+}

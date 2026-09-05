@@ -10,7 +10,7 @@ as projection on zi_travel_kashi_m
     @ObjectModel.text.element: [ 'AgencyName' ]
     AgencyId,
     _agency.Name as AgencyName,
-    @ObjectModel.text.element: [ 'CustomerName' ]
+    @ObjectModel.text.element: [ 'CustomerName' ] --going to combine customer id and last name in customer name and display in column customername
     CustomerId,
     _customer.LastName as CustomerName,
     BeginDate,

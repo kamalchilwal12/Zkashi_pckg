@@ -1,0 +1,5 @@
+CLASS zbp_i_kashi_rap_book DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_kashi_rap_book.
+ENDCLASS.
+
+CLASS zbp_i_kashi_rap_book IMPLEMENTATION.
+ENDCLASS.

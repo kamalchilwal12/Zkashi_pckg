@@ -1,0 +1,4 @@
+@EndUserText.label: 'service defination for travel booking'
+define service Zsd_kashi_rap_book {
+  expose zi_kashi_rap_book;
+}
